@@ -20,15 +20,18 @@ const createWindow = () => {
         width: 800,
         height: 600,
         frame: false,
-        resizable: false,
+        resizable: true,
         webPreferences: {
             preload: path.join(__dirname, '/preload.js'),
             enableRemoteModule  : true,
             nodeIntegration: true,
+            contextIsolation: false,
         },
     });
 
     mainWindow.loadURL('file://' + __dirname + '/ui/index.ejs');
+
+    //mainWindow.webContents.openDevTools();
 
     mainWindow.on('ready-t  o-show', () => {
         mainWindow.show();

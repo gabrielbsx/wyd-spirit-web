@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
         backgroundColor: customTitlebar.Color.fromHex('#30363b'),
         icon: './images/cat.jpg',
     });
+
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector);
         if (element) element.innerText = text;
