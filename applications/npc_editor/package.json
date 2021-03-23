@@ -1,0 +1,9 @@
+{
+  "license": "MIT",
+  "scripts": {
+    "start": "electron src/index.js"
+  },
+  "dependencies": {
+    "electron": "^12.0.1"
+  }
+}
