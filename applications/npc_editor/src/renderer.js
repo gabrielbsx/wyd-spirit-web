@@ -1,17 +1,18 @@
+const { remote } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const spawn = require('child_process').spawn;
 
 function getInfoMob(mobname) {
+    var window = remote.getCurrentWindow();
     console.log(mobname);
-    getMob(mobname);
 }
 
 function getMob(mobname) {
     try {
-        const mob = fs.readFileSync(path.join(__dirname, '../data/npc/' + mobname));
-        console.log(mob);
+        const pythonProcess = spawn('python', [__dirname + '../structs.py', mobname]);
+
     } catch (err) {
         console.log(err);
-        alert(err.toString());
     }
-}
+}   
