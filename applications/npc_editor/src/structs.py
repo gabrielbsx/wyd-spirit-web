@@ -77,6 +77,18 @@ if (len(mob) > 0):
         mob = STRUCT_MOB()
         npc.readinto(mob)
         
+        items = {}
+        
+        with open('src/data/base/itemname.csv', 'r') as itemlist:
+            for item in itemlist.readlines():
+                try:
+                    itemline = item.split(',')
+                    itemid = itemline[0]
+                    if (int(itemid)):
+                        items[int(itemid)] = itemline[1]
+                except:
+                    pass
+        
         mobJson = {}
         
         mobJson['MobName'] = mob.MobName.decode()
@@ -88,6 +100,10 @@ if (len(mob) > 0):
             mobJson['Equip'][i] = {}
             mobJson['Equip'][i]['sIndex'] = mob.Equip[i].sIndex
             mobJson['Equip'][i]['code'] = str(mob.Equip[i].sIndex)
+            try:
+                mobJson['Equip'][i]['name'] = items[int(mob.Equip[i].sIndex)]
+            except:
+                pass
             for j in range(0, 3):
                 mobJson['Equip'][i]['code'] = mobJson['Equip'][i]['code'] + ' ' + \
                     str(mob.Equip[i].steffect[j].ceffect) + ' ' + \
@@ -97,6 +113,10 @@ if (len(mob) > 0):
             mobJson['Carry'][i] = {}
             mobJson['Carry'][i]['sIndex'] = mob.Carry[i].sIndex
             mobJson['Carry'][i]['code'] = str(mob.Carry[i].sIndex)
+            try:
+                mobJson['Carry'][i]['name'] = items[int(mob.Carry[i].sIndex)]
+            except:
+                pass
             for j in range(0, 3):
                 mobJson['Carry'][i]['code'] = mobJson['Carry'][i]['code'] + ' ' + \
                     str(mob.Carry[i].steffect[j].ceffect) + ' ' + \

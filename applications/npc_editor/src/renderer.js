@@ -24,35 +24,50 @@ function getMob(mobname) {
             var mobEquip = document.querySelector('#mobEquip > tbody');
 
             Object.values(npc.Carry).forEach((value, key) => {
-                var tr = document.createElement('tr');
-
-                var td = document.createElement('td');
-                var content = document.createTextNode(key + 1);
-                td.appendChild(content);
-
-                var td2 = document.createElement('td');
-                var content2 = document.createTextNode(value.code);
-                td2.appendChild(content2);
-
-                tr.appendChild(td);
-                tr.appendChild(td2);
-                mobCarry.appendChild(tr);
+                if (!(value.sIndex == 0 || value.sIndex == '0')) {
+                    var tr = document.createElement('tr');
+    
+                    var td = document.createElement('td');
+                    var content = document.createTextNode(key + 1);
+                    td.appendChild(content);
+    
+                    var td2 = document.createElement('td');
+                    var content2 = document.createTextNode(value.code);
+                    td2.appendChild(content2);
+    
+                    var td3 = document.createElement('td');
+                    var content3 = document.createTextNode(value.name);
+                    td3.appendChild(content3);
+    
+                    tr.appendChild(td);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    mobCarry.appendChild(tr);
+                }
+                    
             });
 
             Object.values(npc.Equip).forEach((value, key) => {
-                var tr = document.createElement('tr');
+                if (!(value.sIndex == 0 || value.sIndex == '0')) {
+                    var tr = document.createElement('tr');
 
-                var td = document.createElement('td');
-                var content = document.createTextNode(key + 1);
-                td.appendChild(content);
+                    var td = document.createElement('td');
+                    var content = document.createTextNode(key + 1);
+                    td.appendChild(content);
 
-                var td2 = document.createElement('td');
-                var content2 = document.createTextNode(value.code);
-                td2.appendChild(content2);
+                    var td2 = document.createElement('td');
+                    var content2 = document.createTextNode(value.code);
+                    td2.appendChild(content2);
 
-                tr.appendChild(td);
-                tr.appendChild(td2);
-                mobEquip.appendChild(tr);
+                    var td3 = document.createElement('td');
+                    var content3 = document.createTextNode(value.name);
+                    td3.appendChild(content3);
+
+                    tr.appendChild(td);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    mobEquip.appendChild(tr);
+                }
             });
 
             $('#mobEquip').DataTable();

@@ -1,3 +1,5 @@
+const userService = require('../services/user-service');
+
 exports.create = async (req, res, next) => {
     res.send();
 };
@@ -7,10 +9,10 @@ exports.read = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
-<<<<<<< HEAD
     try {
         const { username, password, email, method } = req.body;
-        
+        const userService = new userService();
+        console.log(userService);
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -19,9 +21,6 @@ exports.update = async (req, res, next) => {
             message: 'Internal error!',
         });
     }
-=======
-    res.send();
->>>>>>> parent of 61608be (Init away)
 };
 
 exports.delete = async (req, res, next) => {
