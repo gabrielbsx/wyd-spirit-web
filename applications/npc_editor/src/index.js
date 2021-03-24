@@ -19,10 +19,9 @@ const createWindow = () => {
     const mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
-        frame: false,
         resizable: true,
         webPreferences: {
-            preload: __dirname + '/preload.js',
+            preload: './preload.js',
             enableRemoteModule  : true,
             nodeIntegration: true,
             contextIsolation: false,
@@ -31,9 +30,9 @@ const createWindow = () => {
 
     mainWindow.loadURL('file://' + __dirname + '/ui/index.ejs');
 
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
-    mainWindow.on('ready-t  o-show', () => {
+    mainWindow.on('ready-to-show', () => {
         mainWindow.show();
     });
 };

@@ -3,12 +3,19 @@ const fs = require('fs');
 const path = require('path');
 const { spawn, exec } = require('child_process');
 
+var created = 0;
+
 function getInfoMob(mobname) {
     getMob(mobname);
 }
 
 function getMob(mobname) {
     try {
+        if (created > 0) {
+            $('#mobEquip > tbody').empty();
+            $('#mobCarry > tbody').empty();
+            created = true;
+        }
         const pythonProcess = spawn('python', ['./src/structs.py', mobname]);
         pythonProcess.stdout.on('data', (data) => {
             var npc = data.toString();
@@ -48,8 +55,10 @@ function getMob(mobname) {
                 mobEquip.appendChild(tr);
             });
 
-            $('#mobEquip').DataTable({});
-            $('#mobCarry').DataTable({});
+            $('#mobEquip').DataTable();
+            $('#mobCarry').DataTable();
+
+            created++;
         });
         
     } catch (err) {
