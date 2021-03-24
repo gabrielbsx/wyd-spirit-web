@@ -71,36 +71,37 @@ class STRUCT_MOB(ctypes.Structure):
     
 mob = sys.argv[1]
 
-with open('./data/npc/' + mob, 'rb') as npc:
-    
-    mob = STRUCT_MOB()
-    npc.readinto(mob)
-    
-    mobJson = {}
-    
-    mobJson['MobName'] = mob.MobName.decode()
-    
-    mobJson['Equip'] = {}
-    mobJson['Carry'] = {}
-    
-    for i in range(0, 16):
-        mobJson['Equip'][i] = {}
-        mobJson['Equip'][i]['sIndex'] = mob.Equip[i].sIndex
-        mobJson['Equip'][i]['code'] = str(mob.Equip[i].sIndex)
-        for j in range(0, 3):
-            mobJson['Equip'][i]['code'] = mobJson['Equip'][i]['code'] + ' ' + \
-                str(mob.Equip[i].steffect[j].ceffect) + ' ' + \
-                str(mob.Equip[i].steffect[j].cvalue)
-    
-    for i in range(0, 64):
-        mobJson['Carry'][i] = {}
-        mobJson['Carry'][i]['sIndex'] = mob.Carry[i].sIndex
-        mobJson['Carry'][i]['code'] = str(mob.Carry[i].sIndex)
-        for j in range(0, 3):
-            mobJson['Carry'][i]['code'] = mobJson['Carry'][i]['code'] + ' ' + \
-                str(mob.Carry[i].steffect[j].ceffect) + ' ' + \
-                str(mob.Carry[i].steffect[j].cvalue)
+if (len(mob) > 0):
+    with open('src/data/npc/' + mob, 'rb') as npc:
         
-    print(json.dumps(mobJson))
-    
-npc.close()
+        mob = STRUCT_MOB()
+        npc.readinto(mob)
+        
+        mobJson = {}
+        
+        mobJson['MobName'] = mob.MobName.decode()
+        
+        mobJson['Equip'] = {}
+        mobJson['Carry'] = {}
+        
+        for i in range(0, 16):
+            mobJson['Equip'][i] = {}
+            mobJson['Equip'][i]['sIndex'] = mob.Equip[i].sIndex
+            mobJson['Equip'][i]['code'] = str(mob.Equip[i].sIndex)
+            for j in range(0, 3):
+                mobJson['Equip'][i]['code'] = mobJson['Equip'][i]['code'] + ' ' + \
+                    str(mob.Equip[i].steffect[j].ceffect) + ' ' + \
+                    str(mob.Equip[i].steffect[j].cvalue)
+        
+        for i in range(0, 64):
+            mobJson['Carry'][i] = {}
+            mobJson['Carry'][i]['sIndex'] = mob.Carry[i].sIndex
+            mobJson['Carry'][i]['code'] = str(mob.Carry[i].sIndex)
+            for j in range(0, 3):
+                mobJson['Carry'][i]['code'] = mobJson['Carry'][i]['code'] + ' ' + \
+                    str(mob.Carry[i].steffect[j].ceffect) + ' ' + \
+                    str(mob.Carry[i].steffect[j].cvalue)
+            
+        print(json.dumps(mobJson))
+        
+    npc.close()

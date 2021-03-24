@@ -1,12 +1,22 @@
 {
   "license": "MIT",
+  "name": "npc-editor",
+  "author": "Kentaro",
+  "version": "1.0.0",
+  "description": "NPC EDITOR",
   "scripts": {
-    "start": "electron src/index.js"
+    "dev": "electron index.js",
+    "build": "electron-builder"
   },
   "dependencies": {
+    "ejs-electron": "^2.1.1"
+  },
+  "devDependencies": {
     "child_process": "^1.0.2",
+    "electron-packager": "^15.2.0",
     "custom-electron-titlebar": "^3.2.6",
-    "ejs-electron": "^2.1.1",
-    "electron": "^12.0.1"
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5",
+    "electronite": "^7.2.3"
   }
 }

@@ -17,12 +17,12 @@ ejse.data({
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 800,
         frame: false,
         resizable: true,
         webPreferences: {
-            preload: path.join(__dirname, '/preload.js'),
+            preload: __dirname + '/preload.js',
             enableRemoteModule  : true,
             nodeIntegration: true,
             contextIsolation: false,
