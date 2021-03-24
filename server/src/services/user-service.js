@@ -5,13 +5,29 @@ module.exports = class userService{
     userRules = /^([A-Za-z0-9]{4,12})$/;
     passRules = /^([A-Za-z0-9]{4,12})$/;
 
-    constructor(username, password = null, email = null, name = null) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.name = name;
+    constructor() {
         this.status = '';
         this.message = '';
+    }
+
+    setUsername(username) {
+        return (this.username = username);
+    }
+
+    setPassword(password) {
+        return (this.password = password);
+    }
+    
+    setEmail(email) {
+        return (this.email = email);
+    }
+
+    setName(name) {
+        return (this.name = name);
+    }
+
+    setOldPassword(oldpassword) {
+        return (this.oldpassword = oldpassword);
     }
 
     create() {
@@ -73,6 +89,22 @@ module.exports = class userService{
         }
     }
 
+    getByUsername() {
+        try {
+
+        } catch (err) {
+            
+        }
+    }
+
+    getByEmail() {
+        try {
+
+        } catch (err) {
+
+        }
+    }
+
     updateByEmail() {
         try {
             if (emailRules(this.email)) {
@@ -93,7 +125,7 @@ module.exports = class userService{
         try {
             if (this.username.match(this.userRules)) {
                 if (this.password.match(this.passRules)) {
-                    if (userRepository.updateByUsername(this.username, this.password)) {
+                    if (userRepository.updateByUsername(this.username, this.password, this.oldpassword)) {
     
                     }
                 }

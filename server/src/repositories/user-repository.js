@@ -1,3 +1,5 @@
+const userModel = require('../models/users-model');
+
 exports.create = async (username, password, email, name) => {
     try {
         return false;
@@ -25,9 +27,15 @@ exports.updateByEmail = async (email) => {
     }
 };
 
-exports.updateByUsername = async (username) => {
+exports.updateByUsername = async (username, password) => {
     try {
-        return false;
+        return await userModel.update({
+            password: password
+        }, {
+            where: {
+                username: username
+            }
+        })
     } catch (err) {
         console.log(err);
         return false;

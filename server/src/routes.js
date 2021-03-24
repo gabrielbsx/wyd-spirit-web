@@ -14,7 +14,7 @@ const authenticate = require('./middlewares/authenticate');
 
 routes.get('/', homeController);
 
-routes.use(authenticate);
+//routes.use(authenticate);
 
 routes  .route('/users')
         .post(userController.create)
