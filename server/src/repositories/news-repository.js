@@ -1,24 +1,32 @@
-const userModel = require('../models/users-model');
+const newsModel = require('../models/news-model');
 
-exports.create = async (username, password, email, name) => {
+exports.create = async (title, slug, category, content, name) => {
     try {
-        return false;
+        return await newsModel.create({
+            title: title,
+            slug: slug,
+            content: content,
+            name: name,
+            category: category,
+        });
     } catch (err) {
         return false;
     }
 };
 
-exports.exists = async (username) => {
+exports.updateById = async (id, title, slug, category, content, name) => {
     try {
-        return false;
-    } catch (err) {
-        return false;
-    }
-};
-
-exports.updateByEmail = async (email) => {
-    try {
-        return false;
+        return await newsModel.update({
+            title: title,
+            slug: slug,
+            content: content,
+            name: name,
+            category: category,
+        }, {
+            where: {
+                id: id,
+            },
+        });
     } catch (err) {
         return false;
     }
@@ -30,7 +38,7 @@ exports.updateByUsername = async (username, password) => {
             password: password
         }, {
             where: {
-                username: username
+                username: username,
             }
         })
     } catch (err) {
