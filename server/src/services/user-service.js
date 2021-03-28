@@ -19,6 +19,7 @@ module.exports = class userService{
             this.message = 'Usuário deve conter 4 a 12 caracteres alfanuméricos!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -32,6 +33,7 @@ module.exports = class userService{
             this.message = 'A senha deve conter 4 a 12 caracteres alfanuméricos!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -45,6 +47,7 @@ module.exports = class userService{
             this.message = 'Email inválido!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -58,6 +61,7 @@ module.exports = class userService{
             this.message = 'O nome deve conter entre 4 a 50 caracteres!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -71,6 +75,7 @@ module.exports = class userService{
             this.message = 'A senha antiga deve conter 4 a 12 caracteres alfanuméricos!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -79,22 +84,16 @@ module.exports = class userService{
         return this.message;
     }
 
-    create() {
+    create(username, password, email, name) {
         try {
-            if (this.username.match(this.userRules)) {
-                if (this.password.match(this.passRules)) {
-                    if (emailRules(this.email) && this.email.length < 100) {
-                        if (this.name.length > 4 && this.name.length < 50) {
-                            if (!this.userExists()) {
-                                if (userRepository.create(this.username, this.password, this.email, this.name)) {
-                                    this.message = 'Cadastro efetuado com sucesso!';
-                                    return true;
-                                } else this.message = 'Não foi possível efetuar o cadastro!';
-                            } else this.message = 'Não foi possível efetuar o cadastro!';
-                        } else this.message = 'Nome deve conter entre 4 a 50 caracteres!';
-                    } else this.message = 'Email inválido!';
-                } else this.message = 'Senha deve conter 4 a 12 caracteres!';
-            } else his.message = 'Usuário deve conter 4 a 12 caracteres!';
+            if (this.setUsername(username) && this.setPassword(password) && this.setEmail(email) && this.setName(name)) {
+                if (!this.userExists()) {
+                    if (userRepository.create(this.username, this.password, this.email, this.name)) {
+                        this.message = 'Cadastro efetuado com sucesso!';
+                        return true;
+                    } else this.message = 'Não foi possível efetuar o cadastro!';
+                } else this.message = 'Não foi possível efetuar o cadastro!';
+            }
             return false;
         } catch (err) {
             this.message = err.toString();
@@ -107,8 +106,10 @@ module.exports = class userService{
             if (userRepository.exists(this.username)) {
                 return true;
             }
+            this.message = 'Usuário existente!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }

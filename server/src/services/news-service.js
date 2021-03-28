@@ -17,6 +17,7 @@ module.exports = class newsService{
             this.message = 'Título deve conter entre 10 a 100 caracteres!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -30,6 +31,7 @@ module.exports = class newsService{
             this.message = 'Slug deve conter entre 10 a 50 caracteres!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -43,6 +45,7 @@ module.exports = class newsService{
             this.message = 'Categoria inválida!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -51,6 +54,7 @@ module.exports = class newsService{
         try {
             return (this.content = content);
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -64,6 +68,7 @@ module.exports = class newsService{
             this.message = 'O nome deve conter entre 4 a 50 caracteres!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
@@ -76,6 +81,7 @@ module.exports = class newsService{
             }
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }
