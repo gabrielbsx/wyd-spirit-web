@@ -12,15 +12,25 @@ module.exports = class userService{
 
     setUsername(username) {
         try {
-            return (this.username = username);
+            if (username.match(this.userRules)) {
+                this.username = username;
+                return true;
+            }
+            this.message = 'Usuário deve conter 4 a 12 caracteres alfanuméricos!';
+            return false;
         } catch (err) {
             return false;
         }
     }
 
     setPassword(password) {
-        try {   
-            return (this.password = password);
+        try {
+            if (password.match(this.passRules)) {
+                this.password = password;
+                return true;
+            }
+            this.message = 'A senha deve conter 4 a 12 caracteres alfanuméricos!';
+            return false;
         } catch (err) {
             return false;
         }
@@ -28,7 +38,12 @@ module.exports = class userService{
     
     setEmail(email) {
         try {
-            return (this.email = email);
+            if (emailRules(email) && email.length < 100) {
+                this.email = email;
+                return true;
+            }
+            this.message = 'Email inválido!';
+            return false;
         } catch (err) {
             return false;
         }
@@ -36,7 +51,12 @@ module.exports = class userService{
 
     setName(name) {
         try {
-            return (this.name = name);
+            if (name.length > 4 && name.length < 50) {
+                this.name = name;
+                return true;
+            }
+            this.message = 'O nome deve conter entre 4 a 50 caracteres!';
+            return false;
         } catch (err) {
             return false;
         }
@@ -44,7 +64,12 @@ module.exports = class userService{
 
     setOldPassword(oldpassword) {
         try {
-            return (this.oldpassword = oldpassword);
+            if (oldpassword.match(this.passRules)) {
+                this.oldpassword = oldpassword;
+                return true;
+            }
+            this.message = 'A senha antiga deve conter 4 a 12 caracteres alfanuméricos!';
+            return false;
         } catch (err) {
             return false;
         }
