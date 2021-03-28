@@ -1,41 +1,60 @@
 const { updateByUsername } = require('../repositories/news-repository');
-const UserService = require('../services/news-service');
-const userService = new UserService();
+const NewsService = require('../services/news-service');
 
 exports.create = async (req, res, next) => {
-    res.send();
+    try {
+        const { title, slug, category, content, name } = req.body;
+        const newsService = NewsService();
+
+        newsService.setTitle(title);
+        newsService.setSlug(slug);
+        newsService.category(category);
+        newsService.content(content);
+        newsService.name(name);
+
+        const create = newsService.create();
+
+    } catch (err) {
+        return res.status(500).json({
+            status: 'error',
+            auth: true,
+            message: err.toString(),
+        })
+    }
 };
 
 exports.read = async (req, res, next) => {
     try {
     } catch (err) {
-        console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             status: 'error',
             auth: true,
-            message: 'Internal error!',
+            message: err.toString(),
         });
     }
-    res.send();
 };
 
 exports.update = async (req, res, next) => {
     try {
-        const { username, password, oldpassword } = req.body;
-        userService.setUsername(username);
-        userService.setPassword(password);
-        userService.setOldPassword(oldpassword);
-        userService.updateByUsername(username);
+        const { title, slug, category, content } = req.body;
+        
     } catch (err) {
-        console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             status: 'error',
             auth: true,
-            message: 'Internal error!',
+            message: err.toString(),
         });
     }
 };
 
 exports.delete = async (req, res, next) => {
-    res.send();
+    try {
+
+    } catch (err) {
+        return res.status(500).json({
+            status: 'error',
+            auth: true,
+            message: err.toString(),
+        });
+    }
 };

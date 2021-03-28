@@ -11,23 +11,51 @@ module.exports = class userService{
     }
 
     setUsername(username) {
-        return (this.username = username);
+        try {
+            return (this.username = username);
+        } catch (err) {
+            return false;
+        }
     }
 
     setPassword(password) {
-        return (this.password = password);
+        try {   
+            return (this.password = password);
+        } catch (err) {
+            return false;
+        }
     }
     
     setEmail(email) {
-        return (this.email = email);
+        try {
+            return (this.email = email);
+        } catch (err) {
+            return false;
+        }
     }
 
     setName(name) {
-        return (this.name = name);
+        try {
+            return (this.name = name);
+        } catch (err) {
+            return false;
+        }
     }
 
     setOldPassword(oldpassword) {
-        return (this.oldpassword = oldpassword);
+        try {
+            return (this.oldpassword = oldpassword);
+        } catch (err) {
+            return false;
+        }
+    }
+
+    getStatus() {
+        return this.status;
+    }
+
+    getMessage() {
+        return this.message;
     }
 
     create() {
@@ -40,6 +68,7 @@ module.exports = class userService{
                                 if (userRepository.create(this.username, this.password, this.email, this.name)) {
                                     this.status = 'success';
                                     this.message = 'Cadastro efetuado com sucesso!';
+                                    return true;
                                 } else {
                                     this.status = 'error';
                                     this.message = 'Não foi possível efetuar o cadastro!';
@@ -64,16 +93,11 @@ module.exports = class userService{
                 this.status = 'error';
                 this.message = 'Usuário inválido!';
             }
-            return {
-                status: this.status,
-                message: this.message,
-            };
+            return false;
         } catch (err) {
-            console.log(err);
-            return {
-                status: 'error',
-                message: this.message,
-            };
+            this.status = 'error';
+            this.message = err.toString();
+            return false;
         }
     }
 
@@ -84,7 +108,6 @@ module.exports = class userService{
             }
             return false;
         } catch (err) {
-            console.log(err);
             return false;
         }
     }
@@ -93,7 +116,7 @@ module.exports = class userService{
         try {
 
         } catch (err) {
-            
+            return false;
         }
     }
 
@@ -101,7 +124,7 @@ module.exports = class userService{
         try {
 
         } catch (err) {
-
+            return false;
         }
     }
 
@@ -116,7 +139,6 @@ module.exports = class userService{
             }
             return false;
         } catch (err) {
-            console.log(err);
             return false;
         }
     }
@@ -132,7 +154,6 @@ module.exports = class userService{
             }
             return false;
         } catch (err) {
-            console.log(err);
             return false;
         }
     }
@@ -144,7 +165,6 @@ module.exports = class userService{
             }
             return false;
         } catch (err) {
-            console.log(err);
             return false;
         }
     }
@@ -156,7 +176,6 @@ module.exports = class userService{
             }
             return false;
         } catch (err) {
-            console.log(err);
             return false;
         }
     }

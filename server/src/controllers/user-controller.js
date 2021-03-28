@@ -1,6 +1,5 @@
 const { updateByUsername } = require('../repositories/user-repository');
 const UserService = require('../services/user-service');
-const userService = new UserService();
 
 exports.create = async (req, res, next) => {
     res.send();
@@ -22,6 +21,7 @@ exports.read = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const { username, password, oldpassword } = req.body;
+        const userService = new UserService();
         userService.setUsername(username);
         userService.setPassword(password);
         userService.setOldPassword(oldpassword);
