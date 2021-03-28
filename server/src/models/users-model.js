@@ -17,19 +17,16 @@ class Users extends Model {
     this.addHook('beforeCreate', async user => {
       if (user.password) {
         user.password = await bcrypt.hash(user.password, 8);
-        user.created_at = new Date();
       }
     });
     this.addHook('beforeSave', async user => {
       if (user.password) {
         user.password = await bcrypt.hash(user.password, 8);
-        user.created_at = new Date();
       }
     });
     this.addHook('beforeUpdate', async user => {
       if (user.password) {
         user.password = await bcrypt.hash(user.password, 8);
-        user.updated_at = new Date();
       }
     });
     return this;
