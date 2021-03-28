@@ -1,5 +1,4 @@
-const emailRules = require('email-validator');
-const userRepository = require('../repositories/news-repository');
+const newsRepository = require('../repositories/news-repository');
 
 module.exports = class newsService{
     slugRules = /^([a-zA-Z0-9_-]{10,50})$/;
@@ -49,24 +48,27 @@ module.exports = class newsService{
         }
     }
 
-    getStatus() {
-        return this.status;
-    }
-
     getMessage() {
         return this.message;
     }
 
     create() {
         try {
-            if (this.title.length > 10 && this.title.length < ) {
-
-            } else {
-                this.status = 'error';
-                this.message = 'Titulo deve conter 10 a 50 caracteres!';
-            }
+            if (this.title.length > 10 && this.title.length < 100) {
+                if (this.slug.length > 10 && this.slug.length < 50) {
+                    if (this.name.length > 4 && this.name.length < 50) {
+                        if (this.category > 0 && this.category < 5) {
+                            if (newsRepository.create(this.title, this.slug, this.category, this.content, this.name)) {
+                                this.message = 'Notícia criada com sucesso!';
+                                return true;
+                            } else this.message = 'Não foi possível criar a notícia!';
+                        } else this.message = 'Categoria inválida!';
+                    } else this.message = 'Nome deve conter entre 4 a 50 caracteres!';
+                } else this.message = 'Slug deve conter entre 10 a 50 caracteres!';
+            } else this.message = 'Título deve conter entre 10 a 50 caracteres!';
             return false;
         } catch (err) {
+            this.message = err.toString();
             return false;
         }
     }

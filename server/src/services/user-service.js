@@ -50,10 +50,6 @@ module.exports = class userService{
         }
     }
 
-    getStatus() {
-        return this.status;
-    }
-
     getMessage() {
         return this.message;
     }
@@ -66,36 +62,16 @@ module.exports = class userService{
                         if (this.name.length > 4 && this.name.length < 50) {
                             if (!this.userExists()) {
                                 if (userRepository.create(this.username, this.password, this.email, this.name)) {
-                                    this.status = 'success';
                                     this.message = 'Cadastro efetuado com sucesso!';
                                     return true;
-                                } else {
-                                    this.status = 'error';
-                                    this.message = 'Não foi possível efetuar o cadastro!';
-                                }
-                            } else {
-                                this.status = 'error';
-                                this.message = 'Não foi possível efetuar o cadastro!';
-                            }
-                        } else {
-                            this.status = 'error';
-                            this.message = 'Nome inválido!';
-                        }
-                    } else {
-                        this.status = 'error';
-                        this.message = 'Email inválido!';
-                    }
-                } else {
-                    this.status = 'error';
-                    this.message = 'Senha inválida!';
-                }
-            } else {
-                this.status = 'error';
-                this.message = 'Usuário inválido!';
-            }
+                                } else this.message = 'Não foi possível efetuar o cadastro!';
+                            } else this.message = 'Não foi possível efetuar o cadastro!';
+                        } else this.message = 'Nome deve conter entre 4 a 50 caracteres!';
+                    } else this.message = 'Email inválido!';
+                } else this.message = 'Senha deve conter 4 a 12 caracteres!';
+            } else his.message = 'Usuário deve conter 4 a 12 caracteres!';
             return false;
         } catch (err) {
-            this.status = 'error';
             this.message = err.toString();
             return false;
         }
